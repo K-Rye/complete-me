@@ -23,21 +23,21 @@ describe('trie', () => {
 
   it('should increase count each time we enter a new word', () => {
     expect(trie.count).to.eq(0);
-    trie.insert('astounding');
+    trie.insert('parachute');
     expect(trie.count).to.eq(1);
-    trie.insert('fantastic');
+    trie.insert('panda');
     expect(trie.count).to.eq(2);
-    trie.insert('incredible');
+    trie.insert('paratrooper');
     expect(trie.count).to.eq(3);
   });
 
   it ('should be able to insert multiple words', () => {
-    trie.insert ('astounding');
-    trie.insert ('fantastic');
-    trie.insert ('incredible');
-    trie.suggest('a')
-    trie.suggest('s')
-    expect(trie.suggest()). to equal()
+    trie.insert ('incomplete');
+    trie.insert ('increase');
+    trie.insert ('insane');
+    trie.insert ('insatiable')
+    trie.insert ('insurgent')
+    expect(trie.suggest()).to.deep.equal()
     expect(Object.keys(trie.root.child)).to.deep.eq([ 'a', 'f', 'i' ]);
     console.log(JSON.stringify(trie, null, 4));
     // console.log(expect(Object.keys(trie.root.child)))
