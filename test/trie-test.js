@@ -1,6 +1,10 @@
 import { expect } from 'chai';
 import Trie from '../lib/trie'
 import Node from '../lib/node'
+import fs from 'fs'
+
+const text = '/usr/share/dict/words';
+const dictionary = fs.readFileSync(text).toString().trim().split('\n');
 
 describe('trie', () => {
   let trie;
@@ -35,14 +39,28 @@ describe('trie', () => {
     trie.insert ('incomplete');
     trie.insert ('increase');
     trie.insert ('insane');
-    trie.insert ('insatiable')
-    trie.insert ('insurgent')
-    expect(trie.suggest()).to.deep.equal()
-    expect(Object.keys(trie.root.child)).to.deep.eq([ 'a', 'f', 'i' ]);
-    console.log(JSON.stringify(trie, null, 4));
-    // console.log(expect(Object.keys(trie.root.child)))
-  });
+    trie.insert ('insatiable');
+    trie.insert ('insurgent');
+    expect(Object.keys(trie.root.child)).to.deep.eq([ 'i' ]);
+    // console.log(JSON.stringify(trie, null, 4));
+  })
 
+  it ('should return an array of options', () => {
+    trie.insert ('incomplete');
+    trie.insert ('increase');
+    trie.insert ('insane');
+    trie.insert ('insatiable');
+    trie.insert ('insurgent');
 
+    trie.suggest ('in')
+    // console.log(JSON.stringify(trie, null, 4));
+    // expect (trie.suggest ('in')).to.deep.equal([ 'incomplete', 'increase', 'insane', 'insatiable', 'insurgent' ])
+  })
+
+  it ('should populate input when passing in the dictionary', () => {
+    expect (trie.count()).to.equal(0);
+    trie.populate(dictionary);
+    expect(trie.count()).to.equal(235886)
+  })
 });
 
