@@ -22,17 +22,17 @@ describe('trie', () => {
   });
 
   it('should set its default root to an empty object', () => {
-    expect(trie.root.child).to.deep.eq({});
+    expect(trie.root.child).to.deep.equal({});
   });
 
   it('should increase count each time we enter a new word', () => {
-    expect(trie.count).to.eq(0);
+    expect(trie.count).to.equal(0);
     trie.insert('parachute');
-    expect(trie.count).to.eq(1);
+    expect(trie.count).to.equal(1);
     trie.insert('panda');
-    expect(trie.count).to.eq(2);
+    expect(trie.count).to.equal(2);
     trie.insert('paratrooper');
-    expect(trie.count).to.eq(3);
+    expect(trie.count).to.equal(3);
   });
 
   it ('should be able to insert multiple words', () => {
@@ -51,16 +51,14 @@ describe('trie', () => {
     trie.insert ('insane');
     trie.insert ('insatiable');
     trie.insert ('insurgent');
-
-    trie.suggest ('in')
-    // console.log(JSON.stringify(trie, null, 4));
-    // expect (trie.suggest ('in')).to.deep.equal([ 'incomplete', 'increase', 'insane', 'insatiable', 'insurgent' ])
+    console.log(JSON.stringify(trie, null, 4));
+    expect (trie.suggesting('in')).to.deep.equal([ 'incomplete', 'increase', 'insane', 'insatiable', 'insurgent' ])
   })
 
   it ('should populate input when passing in the dictionary', () => {
-    expect (trie.count()).to.equal(0);
+    expect (trie.count()).to.deep.equal(0);
     trie.populate(dictionary);
-    expect(trie.count()).to.equal(235886)
+    expect(trie.count()).to.deep.equal(235886)
   })
 });
 
